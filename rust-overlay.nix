@@ -298,7 +298,7 @@ let
       ) { extensions = []; targets = []; targetExtensions = []; }
     );
 
-  fromManifest = sha256: manifest: { stdenv, fetchurl, patchelf }:
+  fromManifest = sha256: manifest: { lib, stdenv, fetchurl, patchelf }:
     let manifestFile = if sha256 == null then builtins.fetchurl manifest else fetchurl { url = manifest; inherit sha256; };
     in fromManifestFile manifestFile { inherit lib stdenv fetchurl patchelf; };
 
